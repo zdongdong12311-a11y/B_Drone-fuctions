@@ -71,10 +71,33 @@ cd ../..
 把preprocess.h和preprocess.cpp文件里面的所有的的livox_ros_driver改成livox_ros_driver2
 catkin_make
 如果提示找不到livox_ros_driver2
-export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:~/你的livox_ws工作空间/devel
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:~/你的livox_ws工作空间/devel（最好在一个终端操作或写入bashrc）
 source devel/setup.bash
 如果你没安装eigen库和PCL库，你就得跟着源工程的readme安装
 2、运行：
 roslaunch livox_ros_driver2 msg_MID360.launch
 roslaunch fast_lio mapping_mid360.launch
+
+三、调飞控参数：
+EKF2_EV_CTRL 开启水平、垂直位置和偏航融合。
+EKF2_HGT_MODE 改成 Vision。
+EKF2_GPS_CTRL 全部关闭。
+需要注意的是 EKF2_EV_DELAY 不能直接填 ，Mid-360 扫描周期 100ms 加上 FAST-LIO2 处理时间，实际延迟很可能在 80~150ms 之间，建议用 `rostopic delay` 实测后再填。
+EKF2_EV_POS_X/Y/Z 要填你的实际安装外参，EKF2_EVP_NOISE 和 EKF2_EVA_NOISE 也要配合调。
+
+四、初步测试：
+terminal1：
+cd livox_ws
+source ../../devel/setup.bash
+roslaunch livox_ros_driver2 msg_MID360.launch
+terminal2：
+source devel/setup.bash
+roslaunch fast_lio mapping_mid360.launch
+terminal3:
+python3 ~/mid360-drone/utils/odom-to-mavros.py
+terminal4：
+roslaunch mavros px4.launch
+观看odom和px4位姿数据是否准确，漂移。
+拿着飞机绕一圈，观看位姿是否与初始位姿出现偏差。
+注意：为后续ego避障做准备这里需要把mapping_mid360.launch里面的rviz节点去掉。
 
