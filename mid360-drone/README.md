@@ -71,7 +71,7 @@ cd ../..
 把preprocess.h和preprocess.cpp文件里面的所有的的livox_ros_driver改成livox_ros_driver2
 catkin_make
 如果提示找不到livox_ros_driver2
-export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:~/你的工作空间/devel
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:~/你的livox_ws工作空间/devel
 source devel/setup.bash
 如果你没安装eigen库和PCL库，你就得跟着源工程的readme安装
 2、运行：
