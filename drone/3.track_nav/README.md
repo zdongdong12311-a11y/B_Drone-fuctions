@@ -34,5 +34,5 @@ cd ros_nav_ws/src
 git clone https://github.com/ros-planning/navigation.git
 cd ..
 catkin_make
-将导航的launch文件复制进navigation的项目结构里面
+
 启动：roslaunch move_base nav_3dto2d.launch
