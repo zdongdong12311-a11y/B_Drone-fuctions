@@ -7,7 +7,8 @@
     <param name="base_global_planner" value="global_planner/GlobalPlanner" />
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
     <rosparam file="$(find move_base)/yaml/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find move_base)/yaml/local_costmap_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find move_base)/yaml/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find move_base)/yaml/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find move_base)/yaml/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find move_base)/yaml/move_base_params.yaml" command="load" />
     <rosparam file="$(find move_base)/yaml/dwa_local_planner_params.yaml" command="load" />
