@@ -175,7 +175,7 @@ x y z hover_time
 
 两条 TF 链互补、不冲突：`map → camera_init → body`。
 
-> ⚠️ 如果你看到网上教程提到 `lidar_odometry_frame_id`、`body_pose_frame_id` 等参数，那是社区个人移植版（如 guzhaoyuan 的 fork）添加的功能，**官方版本没有这些参数**，不能通过改 yaml 或命令行参数修改坐标系名称。
+> ⚠️ 如果你看到网上教程提到 `lidar_odometry_frame_id`、`body_pose_frame_id` 等参数，那是社区个人移植版（如 guzhaoyuan 的 fork）添加的功能，如果使用的话，要把map改成world或者其他，否则会冲突。**官方版本没有这些参数**，不能通过改 yaml 或命令行参数修改坐标系名称。
 
 如需修改 FAST-LIO2 的 TF 坐标系名，需直接编辑 `src/FAST_LIO/src/laserMapping.cpp`，修改以下硬编码字符串：
 
