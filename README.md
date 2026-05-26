@@ -1,4 +1,4 @@
-# mid360-drone
+# 主体mid360-drone
 
 利用 Livox Mid-360 激光雷达实现无人机自主避障、建图和导航。
 
