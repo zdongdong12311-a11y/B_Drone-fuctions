@@ -179,7 +179,7 @@ source devel/setup.bash
 ```bash
 source ~/ros_nav_ws/devel/setup.bash
 cd ~/ros_nav_ws
-roslaunch move_base 
+roslaunch move_base nav_3dto2d.launch 
 ```
 
 这将启动 move_base 节点和 RViz 可视化界面（含地图、代价地图、全局/局部路径、激光数据）。
