@@ -62,8 +62,12 @@ catkin_make_isolated --install --use-ninja -DPYTHON_EXECUTABLE=/usr/bin/python3
 ```
 
 ### 5. 使用本项目配置
-
-本仓库的 `livox.launch` 已经使用相对路径加载 `cartographer/lua/livox.lua`，因此不需要把 lua/launch 文件复制进 `cartographer_ros` 包目录。只要 `cartographer_ros` 已编译并 source，就可以直接启动本项目里的 launch 文件。
+```
+cp /path/to/livox.lua my_carto/src/cartographer_ros/cartographer_ros/configuration_files/
+cp /path/to/livox.launch my_carto/src/cartographer_ros/cartographer_ros/launch/
+# 重新编译
+catkin_make_isolated --install --use-ninja -DPYTHON_EXECUTABLE=/usr/bin/python3
+```
 
 ### 6. 配置文件说明
 
@@ -123,8 +127,15 @@ cd ..
 catkin_make
 source devel/setup.bash
 ```
+### 3. 使用本项目配置
 
-### 3. 配置文件说明
+```bash
+cp ~/path/yaml ~/path/navigation/move_base
+cp ~/path/config ~/path/navigation/move_base
+cp ~/path/launch ~/path/navigation/move_base
+```
+
+### 4. 配置文件说明
 
 #### 规划器选择 (`nav_3dto2d.launch`)
 
@@ -159,7 +170,7 @@ source devel/setup.bash
 | `goal_distance_bias` | 20.0 | 趋向目标权重 |
 | `occdist_scale` | 0.05 | 障碍物代价权重（越高越远离障碍） |
 
-### 4. 运行
+### 5. 运行
 
 ```bash
 roslaunch /path/to/Highly_modular_autonomous_drone-main/3.track_nav/navigation/move_base/launch/nav_3dto2d.launch
