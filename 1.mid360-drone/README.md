@@ -196,7 +196,9 @@ rostopic delay /mavros/local_position/pose
 ## 六、初步测试
 
 ```bash
-roslaunch /path/to/Highly_modular_autonomous_drone-main/1.mid360-drone/lidar_to_mavros/launch/lidar_to_mavros.launch
+cd trans_ws
+source ~/trans_ws/devel/setup.bash
+roslaunch lidar_to_mavros lidar_to_mavros.launch
 ```
 
 该 launch 会启动：
