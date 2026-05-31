@@ -156,28 +156,22 @@ drone/
 完成前置安装后:
 
 ```bash
-# 1. 确保 ROS 环境已 source
+# 1. 确保 ROS 环境已 source或写入bashrc
 source /opt/ros/noetic/setup.bash
-source ~/livox_ws/devel/setup.bash
-source ~/fast_lio2_ws/devel/setup.bash
-source ~/trans_ws/devel/setup.bash
+source ~/livox_ws/devel/setup.bash --extend
+source ~/fast_lio2_ws/devel/setup.bash --extend
+source ~/trans_ws/devel/setup.bash --extend
+source ~/3D_to_2D_ws/devel/setup.bash --extend
+source ~/my_carto/install_isolated/setup.bash --extend
+source ~/ros_nav_ws/devel/setup.bash --extend
 
-# 2. 启动 roscore (如果尚未运行)
-roscore &
-
-# 3. 一键启动所有 ROS 节点 (含健康检查)
+# 2. 一键启动所有 ROS 节点 (含健康检查)
 chmod +x start.sh
 ./start.sh
 
-# 4. 在新终端运行自主导航 (二选一)
+# 3. 在新终端运行自主导航 
 python3 navigation.py              # 纯航点导航
-python3 opencv_nav_micro.py        # 导航 + 视觉识别 + 爪控制
-```
 
-`start.sh` 会自动检查:
-- roscore 是否运行
-- 必要 ROS 包是否已编译并 source
-- 关键话题是否出现
 
 退出 `start.sh` (Ctrl+C) 时会自动清理所有后台节点。
 
@@ -212,7 +206,6 @@ python3 navigation.py _takeoff_height:=1.0 _waypoint_timeout:=60.0
 | `low_battery_threshold` | 20.0 | 低电量阈值 (%) |
 | `waypoint_file` | 自动搜索 | 航点文件路径 |
 
-> 视觉任务脚本 (`opencv_nav_micro.py`) 额外支持: `vision_detect_wp`, `vision_grab_wp`, `vision_search_wps`, `vision_timeout_sec`, `drop_offset_x/y/z`, `camera_id`, `claw_port` 等参数。
 
 ## 航点文件格式
 
@@ -303,21 +296,6 @@ rostopic delay /mavros/local_position/pose
 - Ctrl+C → 优雅安全降落
 - 航点超时 → 自动跳转下一航点
 
-### `opencv_nav_micro.py` — 视觉 + 爪控制 + 导航
-
-在 `navigation.py` 基础上增加:
-
-```
-起飞 → 逐航点导航
-  → 航点 N (默认4): 第一次视觉识别，锁定目标颜色
-  → 航点 M (默认5): 爪子抓取
-  → 航点 11/12/13: 限时识别目标颜色
-     → 识别成功 → 飞往投放点 → 释放 → 降落
-     → 全部失败 → 飞回备降航点 → 释放 → 降落
-```
-
-关键航点序号均可通过 ROS 参数配置。
-
 ## 一键启动脚本 (`start.sh`)
 
 启动顺序与延迟:
@@ -328,13 +306,6 @@ rostopic delay /mavros/local_position/pose
 | 2 | point_to_scan.launch | 3s | 3D 点云 → 2D 激光扫描 |
 | 3 | livox.launch | 3s | Cartographer SLAM |
 | 4 | nav_3dto2d.launch | 3s | move_base + RViz |
-
-脚本会:
-- 检查 roscore 是否运行
-- 验证所有必要 ROS 包是否存在
-- 等待关键话题 `/Odometry`、`/mavros/state`、`/scan` 出现
-- 检测节点启动后是否立即退出
-- Ctrl+C 时有序终止所有子进程
 
 ## 安全检查清单
 
@@ -353,9 +324,6 @@ rostopic delay /mavros/local_position/pose
 ## 常见问题
 
 | 问题 | 原因 | 解决 |
-|------|------|------|
-| `start.sh` 报 roscore 未运行 | roscore 未启动 | 先运行 `roscore` |
-| `start.sh` 报 ROS 包未找到 | 未 source 或未编译 | `source ~/xxx/devel/setup.bash` |
 | Cartographer 报 `Could not find livox.lua` | launch 文件路径不对 | 使用本项目 `3.track_nav/cartographer/launch/livox.launch` |
 | move_base 运行但 `/cmd_vel` 无输出 | TF 树不完整 | `rosrun tf tf_echo map base_link` |
 | 建图漂移严重 | 扫描匹配参数不当 | 调整 `livox.lua` 中的 `translation_weight` 和 `min_score` |
@@ -363,6 +331,4 @@ rostopic delay /mavros/local_position/pose
 | 爪子串口连接失败 | 权限不足或设备不存在 | `sudo chmod 666 /dev/ttyUSB0` |
 | FAST-LIO2 编译找不到 driver2 | CMAKE_PREFIX_PATH 未设置 | `export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:~/livox_ws/devel` |
 
-## License
 
-MIT
