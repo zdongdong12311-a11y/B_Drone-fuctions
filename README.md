@@ -165,6 +165,7 @@ source ~/3D_to_2D_ws/devel/setup.bash --extend
 source ~/my_carto/install_isolated/setup.bash --extend
 source ~/ros_nav_ws/devel/setup.bash --extend
 
+source ~/.bashrc
 # 2. 一键启动所有 ROS 节点 (含健康检查)
 chmod +x start.sh
 ./start.sh
