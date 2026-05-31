@@ -123,7 +123,7 @@ yolo export model=yolov8s.pt format=onnx imgsz=640
 #   推荐 INT8 量化
 
 # Step 3: 复制到板子 weights/ 目录
-scp yolov8s_rk3588.rknn user@rk3588:~/rknn-yolov8-master/weights/
+cp yolov8s_rk3588.rknn user@rk3588:~/rknn-yolov8-master/weights/
 ```
 
 **模型要求：**
@@ -153,7 +153,7 @@ make -j$(nproc)
 
 ```bash
 mkdir -p ~/catkin_ws/src
-cp -r /path/to/rknn-yolov8-master ~/catkin_ws/src/rknn_yolov8_ros
+cp -r /path/to/rknn-yolov8-master ~/catkin_ws/src/
 cd ~/catkin_ws && catkin_make
 source devel/setup.bash
 ```
