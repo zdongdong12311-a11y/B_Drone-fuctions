@@ -26,8 +26,15 @@ wstool init src
 wstool merge -t src https://raw.githubusercontent.com/cartographer-project/cartographer_ros/master/cartographer_ros.rosinstall
 wstool update -t src
 ```
+## 3. rosdep
 
-### 3. 解决 libabsl-dev 依赖问题
+```bash
+sudo rosdep init
+rosdep update
+网不行更新失败的话可以使用小鱼ros
+```
+
+### 4. 解决 libabsl-dev 依赖问题
 
 Ubuntu 20.04 的 rosdep 中 `libabsl-dev` 不可用：
 
@@ -48,7 +55,7 @@ src/cartographer/scripts/install_abseil.sh
 sudo apt-get remove ros-${ROS_DISTRO}-abseil-cpp
 ```
 
-### 4. 编译
+### 5. 编译
 
 ```bash
 catkin_make_isolated --install --use-ninja -DPYTHON_EXECUTABLE=/usr/bin/python3
