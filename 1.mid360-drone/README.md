@@ -77,6 +77,7 @@ RViz 中应能看到 Mid-360 点云。
 
 ## 二、安装 FAST-LIO2
 
+FAST_LIO2编译依赖livox_ros_driver2,请先编译livox_ros_driver2
 ```bash
 mkdir -p ~/fast_lio2_ws/src
 cd ~/fast_lio2_ws/src
