@@ -81,6 +81,10 @@ source ~/livox_ws/devel/setup.bash
 
 ```bash
 roslaunch livox_ros_driver2 msg_MID360.launch
+mid360s用
+roslaunch livox_ros_driver2 msg_MID360s.launch
+看点云图：
+roslaunch livox_ros_driver2 rviz_MID360.launch
 ```
 
 RViz 中应能看到 Mid-360 点云。
@@ -162,6 +166,8 @@ source ~/trans_ws/devel/setup.bash
 
 当前桥接节点会保留 FAST-LIO2 odom 的原始时间戳；如果原始时间戳为空才使用当前 ROS 时间。这样后续用 `rostopic delay /mavros/vision_pose/pose` 调 `EKF2_EV_DELAY` 更可靠。
 
+如果用的mid360s：
+将lidar_to_mavros/src/launch 里面的lidar_to_mavros.launch里的msg_MID360.launch改为msg_MID360s.launch.
 ---
 
 ## 四、配置 shell 环境
