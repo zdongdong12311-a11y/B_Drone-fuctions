@@ -22,7 +22,17 @@ cd ..
 catkin_make
 source devel/setup.bash
 ```
+报错：缺少依赖
+```bash
+# 1. 进入你的工作空间
+cd /home/orangepi/3D_to_2D_ws
 
+# 2. 更新 rosdep 数据库（如果之前没 update 过才需要运行这一句）
+rosdep update
+
+# 3. 自动安装 src 目录下所有源码包所需的依赖项
+rosdep install --from-paths src --ignore-src -r -y
+```
 ---
 
 ## 配置
