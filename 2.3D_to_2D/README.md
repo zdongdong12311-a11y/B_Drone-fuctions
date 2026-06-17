@@ -37,10 +37,10 @@ rosdep install --from-paths src --ignore-src -r -y
 
 ## 配置
 
-本仓库的 `start.sh` 会直接按文件路径启动本目录下的 `point_to_scan.launch`，不需要复制到系统包目录。若你想单独运行，也可以直接指定 launch 文件路径：
+复制launch文件到src/path/launch
 
 ```bash
-roslaunch /path/to/Highly_modular_autonomous_drone-main/2.3D_to_2D/point_to_scan.launch
+roslaunch pointcloud_to_laserscan point_to_scan.launch
 ```
 
 ### 参数说明 (`point_to_scan.launch`)
