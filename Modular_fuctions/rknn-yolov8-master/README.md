@@ -185,6 +185,13 @@ roslaunch rknn_yolov8_ros yolov8_ros.launch \
   model_path:=/path/to/model.rknn \
   input_topic:=/camera/image_raw
 
+# 没有图像话题
+roslaunch rknn_yolov8_ros yolov8_ros.launch \
+  model_path:=/path/to/model.rknn \
+  input_mode:=camera \
+  input_topic:=/camera/image_raw 
+  
+
 # 关闭显示窗口（略提速）
 roslaunch rknn_yolov8_ros yolov8_camera.launch enable_display:=false
 ```
