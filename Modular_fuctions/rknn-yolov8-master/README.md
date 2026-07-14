@@ -282,6 +282,11 @@ rknn-yolov8-master/
 
 ---
 
+### 获取话题信息
+```
+示例：yolo_msgs_port.py
+```
+
 ## 🔧 架构详解
 
 ### 三线程流水线（ROS 节点）
@@ -395,11 +400,6 @@ bash scripts/smoke_test.sh --model weights/yolov8s_rk3588.rknn
 
 ---
 
-## 📜 License
-
-[木兰宽松许可证 第2版](LICENSE)（Mulan PSL v2）
-
----
 
 ## 🙏 致谢
 
