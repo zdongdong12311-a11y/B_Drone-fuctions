@@ -131,7 +131,7 @@ cp yolov8s_rk3588.rknn user@rk3588:~/rknn-yolov8-master/weights/
 | 检查项 | 要求 |
 |--------|------|
 | 输入张量 | 1 个，NHWC UINT8 RGB |
-| 输出张量 | **6 个**（YOLOv8 检测头标准输出） |
+| 输出张量 | **9 个**（YOLOv8 检测头标准输出） |
 | 模型输入尺寸 | **640×640**（与 `infer_width/height` 无关） |
 | 目标平台 | RK3588 |
 
