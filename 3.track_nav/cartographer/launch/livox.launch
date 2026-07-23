@@ -4,7 +4,7 @@
    <node name="cartographer_node" 
          pkg="cartographer_ros" 
          type="cartographer_node" 
-         args="-configuration_directory $(dirname)/../lua -configuration_basename livox.lua"
+         args="-configuration_directory $(find cartographer_ros)/configuration_files -configuration_basename livox_test.lua"
          output="screen">
      <remap from="scan" to="/scan" />
      <remap from="odom" to="/mavros/local_position/odom" />
@@ -20,9 +20,10 @@
          type="rviz" 
          required="true" 
          args="-d $(find cartographer_ros)/configuration_files/demo_2d.rviz" />-->
-   <!-- Cartographer owns map/odom/camera_init dynamic transforms. Keep only fixed body-frame transforms here. -->
+   <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom 100"/>
    <!--<node pkg="tf" type="static_transform_publisher" name="odom_to_base_link" args="0 0 0 0 0 0 odom base_link 100"/>-->
    <!--<node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_init" args="0 0 0 0 0 0 base_link camera_init 100"/>-->
+   <node pkg="tf" type="static_transform_publisher" name="map_to_camera_init" args="0 0 0 0 0 0 map camera_init 100" />
    <node pkg="tf" type="static_transform_publisher" name="camera_init_to_base_link" args="0 0 0 0 0 0 camera_init base_link 100"/>
 
  </launch>
