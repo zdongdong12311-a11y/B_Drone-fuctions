@@ -68,11 +68,6 @@ Livox Mid-360 LiDAR
 
 ![TF Tree](./tf_tree.png)
 
-```
-map ──→ odom (Cartographer 动态变换)
-│
-└─→ base_link (FAST-LIO2 实时估计)
-```
 
 | 变换 | 发布者 | 说明 |
 |------|--------|------|
