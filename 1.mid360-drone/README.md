@@ -77,11 +77,11 @@ RViz 中应能看到 Mid-360 点云。
 
 ## 二、安装 FAST-LIO2
 
-FAST_LIO2编译依赖livox_ros_driver2,请先编译livox_ros_driver2
+FAST_LIO2编译依赖livox_ros_driver2,请先编译livox_ros_driver2，使用高频里程计
 ```bash
 mkdir -p ~/fast_lio2_ws/src
 cd ~/fast_lio2_ws/src
-git clone https://github.com/hku-mars/FAST_LIO.git
+git clone https://github.com/Mr-Zqr/FAST_LIO_high_freq
 cd FAST_LIO
 git submodule update --init
 cd ~/fast_lio2_ws
